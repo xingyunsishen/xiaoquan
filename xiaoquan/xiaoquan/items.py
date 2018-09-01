@@ -10,5 +10,5 @@ import scrapy
 
 class XQItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    table_name = scrapy.Field()
+    data_rows = scrapy.Field()
