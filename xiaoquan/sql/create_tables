@@ -1,8 +1,0 @@
-CREATE TABLE if NOT EXISTS didi_quan(
-    pk_md5 varchar(32),
-    title varchar(200),
-    img_url varchar(200),
-    orc_url varchar(200),
-    active int(1),
-    PRIMARY KEY (pk_md5)
-);

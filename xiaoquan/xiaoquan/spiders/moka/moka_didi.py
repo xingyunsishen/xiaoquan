@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 import os
-
 import scrapy
-
 from xiaoquan.items import XQItem
 from xiaoquan.settings import BASE_DIR
-from xiaoquan.utils.base_tools import gen_md5
+from xiaoquan.utils.base_tools import (
+    gen_md5,
+    get_today,
+    get_index_arr,
+    re_didi_title)
 from xiaoquan.utils.orc_img import ocr_qr_code
 
 
@@ -64,9 +66,17 @@ class MokaDidiSpider(scrapy.Spider):
         :return:
         """
         item_context = dict()
+
+        re_title_context = re_didi_title(response.meta.get('title'))
         item_context['title'] = response.meta.get('title')
+        item_context['nums_rmb'] = get_index_arr(re_title_context, 0)
+        item_context['nums_pro'] = get_index_arr(re_title_context, 1)
+        item_context['context'] = get_index_arr(re_title_context, 2)
+        item_context['city'] = get_index_arr(re_title_context, 3)
+
         item_context['img_url'] = response.url
         item_context['pk_md5'] = gen_md5(response.url)
+        item_context['update_time'] = get_today()
 
         file_path = os.path.join(
             BASE_DIR,

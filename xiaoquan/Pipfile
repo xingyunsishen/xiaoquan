@@ -9,6 +9,7 @@ user-agent = "*"
 zbarlight = "*"
 sqlalchemy = "*"
 pymysql = "*"
+pytest = "*"
 
 [dev-packages]
 
